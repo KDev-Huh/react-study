@@ -1,16 +1,20 @@
+import { Fragment } from 'react';
 import Card from './Card.jsx';
 import Course from './Course.jsx';
 
-export default function CourseList({items}) {
+export default function CourseList({title, items}) {
 
-  const [course1, course2, course3] = items;
+  const lastIndex = items.length -1;
 
   return (
-    <Card title="강의 목록">
+    <Card title={title}>
       <div className="courses">
-        <Course {...course1} />
-        <Course {...course2} />
-        <Course {...course3} />
+        {items.map((item, index) =>   (
+          <Fragment >
+            <Course key={item.id} {...item} />
+            {index !== lastIndex && <hr className='divider' />}
+          </Fragment>
+        ))}
       </div>
     </Card>
   )
